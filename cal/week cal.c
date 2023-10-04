@@ -23,6 +23,9 @@ int getmonthlength(int month)
         case 11:
             days = 30;
             break;
+        case 0:
+            days = 0;
+            break;
     }
     return days;
 }
@@ -66,62 +69,73 @@ int getdate(int days, int array[2])
         totaldays += getmonthlength(month);
         month += 1;
     }
-    date = days - totaldays;
+    date = days - totaldays + getmonthlength(month-1);
     array[0] = month-1;
     array[1] = date;
 }
 
 int main()
 {
-    int week, FirstDay, LastDay, FirstDaySeq, LastDaySeq;
-    printf("Week Calendar of Year 2023, please input week sequence(1-53):\n");
-    scanf("%d", &week);
-
-    //报错提醒
-    while(week < 1 || week > 53)
+    while(1)
     {
-        printf("invalid input\n");
+        int week, FirstDay, LastDay, FirstDaySeq, LastDaySeq;
         printf("Week Calendar of Year 2023, please input week sequence(1-53):\n");
         scanf("%d", &week);
-    }
 
-    //First/Last Day Seq
-    FirstDay = (week-1) * 7 + 1;
-    LastDay = week *7;
-
-    
-    //Print Header
-    char a[] = "Mon.", b[] = "Tues." , c[] = "Wend.", h[] = "Thur.", e[] = "Fri.", f[] = "Stat." ,g[] = "Sun.";
-    printf("#w:%10s%10s%10s%10s%10s%10s%10s\n",a,b,c,h,e,f,g);
-    printf("%2d:",week);
-
-    //Print Week
-    int i, d = 1, array[2]={0,0};
-    char space[] = " ";
-    if(week > 1 && week < 53)
-    {
-        for(i = FirstDay; i <= LastDay; i++)
+        //报错提醒
+        while(week < 1 || week > 53)
         {
-            getdate(i, array);
-            printf("%5s", space);
-            printf("%2d-%2d", array[0], array[1]);
+            printf("invalid input\n");
+            printf("Week Calendar of Year 2023, please input week sequence(1-53):\n");
+            scanf("%d", &week);
         }
-    }
-    else if(week == 1)
-    {
-        for(i = 1; i <= 13; i++)
+
+        //First/Last Day Seq
+        FirstDay = 2 + (week-2) * 7;
+        LastDay = 1 + (week-1) *7;
+
+        
+        //Print Header
+        char a[] = "Mon.", b[] = "Tues." , c[] = "Wend.", h[] = "Thur.", e[] = "Fri.", f[] = "Stat." ,g[] = "Sun.";
+        printf("#w:%10s%10s%10s%10s%10s%10s%10s\n",a,b,c,h,e,f,g);
+        printf("%02d:",week);
+
+        //Print Week
+        int i, d = 1, array[2]={0,0};
+        char space[] = " ";
+        if(week > 1 && week < 53)
         {
-            printf("%5s", space);
+            for(i = FirstDay; i <= LastDay; i++)
+            {
+                getdate(i, array);
+                printf("%5s", space);
+                printf("%02d.%02d", array[0], array[1]);
+            }
         }
-        printf("%2d.%2d",1, 1);
-    }
-    else
-    {
-        for(i = FirstDay; i <= 365; i++)
+        else if(week == 1)
         {
-            getdate(i, array);
-            printf("%5s", space);
-            printf("%2d-%2d", array[0], array[1]);
+            for(i = 1; i <= 13; i++)
+            {
+                printf("%5s", space);
+            }
+            printf("%02d.%02d",1, 1);
+        }
+        else
+        {
+            for(i = FirstDay; i <= 365; i++)
+            {
+                getdate(i, array);
+                printf("%5s", space);
+                printf("%02d.%02d", array[0], array[1]);
+            }
+        }
+
+        int exit;
+        printf("\nInput 1 to continue and 0 to exit\n");
+        scanf("%d", &exit);
+        if(exit == 0)
+        {
+            break;
         }
     }
 }
