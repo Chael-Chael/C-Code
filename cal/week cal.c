@@ -1,4 +1,5 @@
 #include <stdio.h>
+//获得每月天数
 int getmonthlength(int month)
 {
     int days;
@@ -23,10 +24,9 @@ int getmonthlength(int month)
             days = 30;
             break;
     }
-
     return days;
 }
-
+//获得2023年任意日是周几
 int getseq(int TotalDays)
 {
     int daySeqOfWeek;
@@ -57,6 +57,19 @@ int getseq(int TotalDays)
 
     return daySeqOfWeek;
 }
+//对任意天执行getdate
+int getdate(int days, int array[2])
+{
+    int month = 1, totaldays = 0, date;
+    while(totaldays < days)
+    {
+        totaldays += getmonthlength(month);
+        month += 1;
+    }
+    date = days - totaldays;
+    array[0] = month-1;
+    array[1] = date;
+}
 
 int main()
 {
@@ -75,16 +88,7 @@ int main()
     //First/Last Day Seq
     FirstDay = (week-1) * 7 + 1;
     LastDay = week *7;
-    FirstDaySeq = getseq(FirstDay);
-    LastDaySeq = getseq(LastDay);
 
-    //Days to Month
-    int month = 1, totaldays = 0, days = 31;
-    while(FirstDay > totaldays)
-    {
-        totaldays += getmonthlength(month); 
-        month += 1;
-    }
     
     //Print Header
     char a[] = "Mon.", b[] = "Tues." , c[] = "Wend.", h[] = "Thur.", e[] = "Fri.", f[] = "Stat." ,g[] = "Sun.";
@@ -92,45 +96,32 @@ int main()
     printf("%2d:",week);
 
     //Print Week
-    int i, d = 1;
-    //
-    if(month - 1 > 0 && month + 1 < 13)
+    int i, d = 1, array[2]={0,0};
+    char space[] = " ";
+    if(week > 1 && week < 53)
     {
-        for(i = 1; i < FirstDaySeq; i++)
+        for(i = FirstDay; i <= LastDay; i++)
         {
-            printf("%2d-%2d", month-1, getmonthlength(month-1)-FirstDaySeq+i+1);
+            getdate(i, array);
+            printf("%5s", space);
+            printf("%2d-%2d", array[0], array[1]);
         }
-
-        for()
-
-        for(i = 1; i > LastDaySeq && i <= 7; i++)
+    }
+    else if(week == 1)
+    {
+        for(i = 1; i <= 13; i++)
         {
-            printf("%2d-%2d", month+1, i);
-        }   
+            printf("%5s", space);
+        }
+        printf("%2d.%2d",1, 1);
     }
     else
     {
-        
+        for(i = FirstDay; i <= 365; i++)
+        {
+            getdate(i, array);
+            printf("%5s", space);
+            printf("%2d-%2d", array[0], array[1]);
+        }
     }
-    
-    
-
-
-    int y = 2023; char space[] = " " ;
-    
-    if((month==1)||(month==2))
-    {
-        month += 12;
-        y -- ;
-    }
-    FirstDaySeq = 
-    LastDaySeq = (1+2*month+3*(month+1)/5+y+y/4-y/100+y/400)%7;
-     += 1;
-    printf("No.%d week in 2023 starts from No.%d day to No.%d day.\n\n",week ,FirstDaySeq, 
-
-    //打印月历
-    
-    
-
-
 }
