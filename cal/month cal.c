@@ -40,7 +40,7 @@ int main()
 
     //计算每月第一天是星期几
     int y = 2023; char space[] = " " ;
-    char a[] = "Mon.", b[] = "Tues." , c[] = "Wend.", h[] = "Thur.", e[] = "Fri.", f[] = "Stat." ,g[] = "Sun.";
+    char a[] = "Mon.", b[] = "Tues." , c[] = "Wend.", h[] = "Thur.", e[] = "Fri.", f[] = "Sat." ,g[] = "Sun.";
     if((month==1)||(month==2))
     {
         month += 12;

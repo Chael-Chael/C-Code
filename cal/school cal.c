@@ -78,55 +78,48 @@ int main()
 {
     while(1)
     {
-        int week, FirstDay, LastDay, FirstDaySeq, LastDaySeq;
-        printf("Week Calendar of Year 2023, please input week sequence(1-53):\n");
-        scanf("%d", &week);
+        int rday, week = 1, startday;
+        printf("Spring Semester Calendar of Year 2023, please input reference day in Feb(1-28):\n");
+        scanf("%d", &rday);
 
-        //报错提醒
-        while(week < 1 || week > 53)
+        while(rday < 1 || rday > 28)
         {
             printf("invalid input\n");
-            printf("Week Calendar of Year 2023, please input week sequence(1-53):\n");
-            scanf("%d", &week);
+            printf("Spring Semester Calendar of Year 2023, please input reference day in Feb(1-28):\n");
+            scanf("%d", &rday);
         }
 
-        //First/Last Day Seq
-        FirstDay = 2 + (week-2) * 7;
-        LastDay = 1 + (week-1) *7;
+        startday = rday + 31;
 
-        
         //Print Header
         char a[] = "Mon.", b[] = "Tues." , c[] = "Wend.", h[] = "Thur.", e[] = "Fri.", f[] = "Sat." ,g[] = "Sun.";
-        printf("#w:%10s%10s%10s%10s%10s%10s%10s\n",a,b,c,h,e,f,g);
-        printf("%02d:",week);
+        printf("\n");
+        printf("#w:%11s%11s%10s%10s%10s%10s%10s\n",a,b,c,h,e,f,g);
 
         //Print Week
-        int i, d = 1, array[2]={0,0};
+        int i, j, d = 1, array[2]={0,0}, startseq;
         char space[] = " ";
-        if(week > 1 && week < 53)
+
+        printf("[%02d]:",week);
+
+        startseq = getseq(startday+7);
+
+
+        for(j = 1; j < startseq; j++)
         {
-            for(i = FirstDay; i <= LastDay; i++)
-            {
-                getdate(i, array);
-                printf("%5s", space);
-                printf("%02d.%02d", array[0], array[1]);
-            }
+            printf("%10s", space);
         }
-        else if(week == 1)
+
+        for(i = startday + 7; i <= 183; j++, i++)
         {
-            for(i = 1; i <= 13; i++)
+            getdate(i, array);
+            printf("%5s", space);
+            printf("%02d.%02d", array[0], array[1]);
+            if(j%7 == 0 && i < 183)
             {
-                printf("%5s", space);
-            }
-            printf("%02d.%02d",1, 1);
-        }
-        else
-        {
-            for(i = FirstDay; i <= 365; i++)
-            {
-                getdate(i, array);
-                printf("%5s", space);
-                printf("%02d.%02d", array[0], array[1]);
+                week++;
+                printf("\n");
+                printf("[%02d]:",week);
             }
         }
 
@@ -138,4 +131,6 @@ int main()
             break;
         }
     }
+
+
 }
