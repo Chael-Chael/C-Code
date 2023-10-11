@@ -1,5 +1,6 @@
 #include <stdio.h>
 //获得每月天数
+//
 int getmonthlength(int month)
 {
     int days;
