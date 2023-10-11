@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1541340749 source:z:\[code]\codec\calendar-wliu-v3\e05-schoolcalendar-v1\schoolcalendar\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1541341642 source:c:\[ndisk]\我的坚果云\[code]\calendar-wliu-v3\e05-schoolcalendar-v1\schoolcalendar\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1541341642 source:c:\[ndisk]\我的坚果云\[code]\calendar-wliu-v3\e05-schoolcalendar-v1\schoolcalendar-bw\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1541394636 source:c:\[ndisk]\我的坚果云\[code]\experiment\e05-calendar4-bw\schoolcalendar-bw\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1564132093 source:z:\[ndisk]\05.course\01.calendar\e05-calendar4-schoolcalendar\schoolcalendar-bw\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1564145646 source:z:\[ndisk]\我的坚果云\05.course\01.calendar\e05-calendar4-schoolcalendar-v2\schoolcalendar-spring\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1564151192 source:z:\[ndisk]\我的坚果云\05.course\01.calendar\e06-calendar5-schoolcalendar-fun-v1\schoolcalendar-spring\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1605454216 source:z:\[code]\2020-fall-projects\01.calendar-变量开始-月历-周历-校历-生日\calendar05-springfun-v3\schoolcalendar-spring\main.c
+	<stdio.h>
+	<stdlib.h>
+
