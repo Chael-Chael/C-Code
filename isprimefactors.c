@@ -54,21 +54,15 @@ int isPrimeNumber(int x)
 
 void printPrimeFactors(int x)
 {
-    int i = 2;
+    int i;
     printf("%d = ", x);
-    while(i <= x)
+    for (i = 2; i <= x; i ++)
     {
         if (x % i == 0)
         {
             printf("%d * ", i);
             x = x / i;
-            i = 2;
-        }
-        else
-        {
-            i ++;
-            continue;
-
+            i = 1;
         }
     }
     printf("\b\b  ");
