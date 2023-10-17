@@ -110,11 +110,12 @@ int main( void )
     return 0;
 }
 
-
+//leapyear return 1
 int isLeapYear( int year )
 {
     return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0) ;
 }
+
 
 
 int getDaySeqOnJan1(int year)
@@ -175,6 +176,27 @@ int  getMonthLength( int year, int month )
     
 // **********************************************
 // << Write your source code here >>
+    switch(month)
+    {
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12: 
+            mLength = 31;
+            break;
+        case 2:
+            mLength = isLeapYear(year) ? 29 : 28;
+            break;
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            mLength = 30;
+            break;
+    }
 // **********************************************
 
     return mLength;
@@ -201,6 +223,45 @@ int  getDaySeq( int year, int month, int day)
     
 // **********************************************
 // << Write your source code here >>
+    switch(month)
+    {
+        case 1:
+            daySeq = day;
+            break;
+        case 2:
+            daySeq = lengthJan + day;
+            break;
+        case 3:
+            daySeq = lengthFeb + day;
+            break;
+        case 4:
+            daySeq = lengthMar + day;
+            break;
+        case 5:
+            daySeq = lengthApr + day;
+            break;
+        case 6:
+            daySeq = lengthMay + day;
+            break;
+        case 7:
+            daySeq = lengthJun + day;
+            break;
+        case 8:
+            daySeq = lengthJul + day;
+            break;
+        case 9:
+            daySeq = lengthAug + day;
+            break;
+        case 10:
+            daySeq = lengthSep + day;
+            break;
+        case 11:
+            daySeq = lengthOct + day;
+            break;
+        case 12:
+            daySeq = lengthNov + day;
+            break;
+    }
 // **********************************************
 
     return daySeq; 
@@ -227,6 +288,7 @@ int  getMonth(int year, int daySeqOfYear)
 
 // **********************************************
 // << Write your source code here >>
+
 // **********************************************
 
     return month;
