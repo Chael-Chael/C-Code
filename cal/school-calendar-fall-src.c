@@ -288,7 +288,45 @@ int  getMonth(int year, int daySeqOfYear)
 
 // **********************************************
 // << Write your source code here >>
-
+    switch(daySeqOfYear)
+    {
+        case daySeqOfYear <= lengthJan:
+            month = 1;
+            break;
+        case daySeqOfYear <= lengthFeb:
+            month = 2;
+            break;
+        case daySeqOfYear <= lengthMar:
+            month = 3;
+            break;
+        case daySeqOfYear <= lengthApr:
+            month = 4;
+            break;
+        case daySeqOfYear <= lengthMay:
+            month = 5;
+            break;
+        case daySeqOfYear <= lengthJun:
+            month = 6;
+            break;
+        case daySeqOfYear <= lengthJul:
+            month = 7;
+            break;
+        case daySeqOfYear <= lengthAug:
+            month = 8;
+            break;
+        case daySeqOfYear <= lengthSep:
+            month = 9;
+            break;
+        case daySeqOfYear <= lengthOct:
+            month = 10;
+            break;
+        case daySeqOfYear <= lengthNov:
+            month = 11;
+            break;
+        case daySeqOfYear <= lengthDec:
+            month = 12;
+            break;
+    }
 // **********************************************
 
     return month;
@@ -315,6 +353,45 @@ int  getDay(int year, int daySeqOfYear)
 
 // **********************************************
 // << Write your source code here >>
+        switch(daySeqOfYear)
+        {
+            case daySeqOfYear <= lengthJan:
+                day = daySeqOfYear;
+                break;
+            case daySeqOfYear <= lengthFeb:
+                day = daySeqOfYear - lengthJan;
+                break;
+            case daySeqOfYear <= lengthMar:
+                day = daySeqOfYear - lengthFeb;
+                break;
+            case daySeqOfYear <= lengthApr:
+                day = daySeqOfYear - lengthMar;
+                break;
+            case daySeqOfYear <= lengthMay:
+                day = daySeqOfYear - lengthApr;
+                break;
+            case daySeqOfYear <= lengthJun:
+                day = daySeqOfYear - lengthMay;
+                break;
+            case daySeqOfYear <= lengthJul:
+                day = daySeqOfYear - lengthJun;
+                break;
+            case daySeqOfYear <= lengthAug:
+                day = daySeqOfYear - lengthJul;
+                break;
+            case daySeqOfYear <= lengthSep:
+                day = daySeqOfYear - lengthAug;
+                break;
+            case daySeqOfYear <= lengthOct:
+                day = daySeqOfYear - lengthSep;
+                break;
+            case daySeqOfYear <= lengthNov:
+                day = daySeqOfYear - lengthOct;
+                break;
+            case daySeqOfYear <= lengthDec:
+                day = daySeqOfYear - lengthNov;
+                break;
+        }
 // **********************************************
 
     return day;
@@ -325,7 +402,6 @@ int  getDaySeqOfWeek(int year, int daySeqOfYear)
 {
     // assume one week starts with Monday
     // 0,1,2,3,4,5,6 stands for Monday, Tuesday, ..., Sunday
-
     return  ( daySeqOfYear + getDaySeqOnJan1(year) - 1 ) % 7;
 }
 
@@ -336,6 +412,7 @@ int  getNextMonday(int year, int referenceDay)
 
 // **********************************************
 // << Write your source code here >>
+    
 // **********************************************
 
     return daySeqOfYear;
@@ -348,6 +425,7 @@ int  getThisMonday(int year, int referenceDay)
 
 // **********************************************
 // << Write your source code here >>
+    if (daySeqOfYear)
 // **********************************************
 
     return daySeqOfYear;
