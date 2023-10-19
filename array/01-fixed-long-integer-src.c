@@ -57,7 +57,11 @@ void generateLongInt( char longInt[] )
     // **********************************************
     // << Your source code starts here >>
     //
-
+    int i;
+    for ( i = 0; i < INT_WIDTH; i ++ )
+    {
+        longInt[i] = rand() % 10 + '0';
+    }
     //
     // << Your source code stops here >>
     // **********************************************
@@ -76,7 +80,13 @@ int addTwoLongInts( char longInt1[],  char longInt2[], char longIntSum[] )
     // **********************************************
     // << Your source code starts here >>
     //
-
+    for (i = INT_WIDTH-1; i > 0; i--)
+    {
+        for (j = INT_WIDTH - 1; j > 0 ; j--)
+        {
+            
+        }
+    }
     //
     // << Your source code stops here >>
     // **********************************************
