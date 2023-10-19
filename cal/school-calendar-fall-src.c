@@ -39,7 +39,7 @@ int main( void )
 {
 
     // Declare variables
-    const int currentYear = 2023;
+    const int currentYear = 2021;
     int referenceDay;
 
     // Display the program information
@@ -288,45 +288,55 @@ int  getMonth(int year, int daySeqOfYear)
 
 // **********************************************
 // << Write your source code here >>
-    switch(daySeqOfYear)
-    {
-        case daySeqOfYear <= lengthJan:
-            month = 1;
-            break;
-        case daySeqOfYear <= lengthFeb:
-            month = 2;
-            break;
-        case daySeqOfYear <= lengthMar:
-            month = 3;
-            break;
-        case daySeqOfYear <= lengthApr:
-            month = 4;
-            break;
-        case daySeqOfYear <= lengthMay:
-            month = 5;
-            break;
-        case daySeqOfYear <= lengthJun:
-            month = 6;
-            break;
-        case daySeqOfYear <= lengthJul:
-            month = 7;
-            break;
-        case daySeqOfYear <= lengthAug:
-            month = 8;
-            break;
-        case daySeqOfYear <= lengthSep:
-            month = 9;
-            break;
-        case daySeqOfYear <= lengthOct:
-            month = 10;
-            break;
-        case daySeqOfYear <= lengthNov:
-            month = 11;
-            break;
-        case daySeqOfYear <= lengthDec:
-            month = 12;
-            break;
+    if(daySeqOfYear <= lengthJan){
+        month = 1;
     }
+    else if(daySeqOfYear <= lengthFeb)
+    {
+        month = 2;
+    }
+    else if(daySeqOfYear <= lengthMar)
+    {
+        month = 3;
+    }
+    else if(daySeqOfYear <= lengthApr)
+    {
+        month = 4;
+    }
+    else if(daySeqOfYear <= lengthMay)
+    {
+        month = 5;
+    }
+    else if(daySeqOfYear <= lengthJun)
+    {
+        month = 6;
+    }
+    else if(daySeqOfYear <= lengthJul)
+    {
+        month = 7;
+    }
+    else if(daySeqOfYear <= lengthAug)
+    {
+        month = 8;
+    }
+    else if(daySeqOfYear <= lengthSep)
+    {
+        month = 9;
+    }
+    else if(daySeqOfYear <= lengthOct)
+    {
+        month = 10;
+    }
+    else if(daySeqOfYear <= lengthNov)
+    {
+        month = 11;
+    }
+    else if(daySeqOfYear <= lengthDec)
+    {
+        month = 12;
+    }   
+            
+         
 // **********************************************
 
     return month;
@@ -353,45 +363,53 @@ int  getDay(int year, int daySeqOfYear)
 
 // **********************************************
 // << Write your source code here >>
-        switch(daySeqOfYear)
-        {
-            case daySeqOfYear <= lengthJan:
-                day = daySeqOfYear;
-                break;
-            case daySeqOfYear <= lengthFeb:
-                day = daySeqOfYear - lengthJan;
-                break;
-            case daySeqOfYear <= lengthMar:
-                day = daySeqOfYear - lengthFeb;
-                break;
-            case daySeqOfYear <= lengthApr:
-                day = daySeqOfYear - lengthMar;
-                break;
-            case daySeqOfYear <= lengthMay:
-                day = daySeqOfYear - lengthApr;
-                break;
-            case daySeqOfYear <= lengthJun:
-                day = daySeqOfYear - lengthMay;
-                break;
-            case daySeqOfYear <= lengthJul:
-                day = daySeqOfYear - lengthJun;
-                break;
-            case daySeqOfYear <= lengthAug:
-                day = daySeqOfYear - lengthJul;
-                break;
-            case daySeqOfYear <= lengthSep:
-                day = daySeqOfYear - lengthAug;
-                break;
-            case daySeqOfYear <= lengthOct:
-                day = daySeqOfYear - lengthSep;
-                break;
-            case daySeqOfYear <= lengthNov:
-                day = daySeqOfYear - lengthOct;
-                break;
-            case daySeqOfYear <= lengthDec:
-                day = daySeqOfYear - lengthNov;
-                break;
-        }
+     if(daySeqOfYear <= lengthJan){
+        day = daySeqOfYear;
+    }
+    else if(daySeqOfYear <= lengthFeb)
+    {
+        day = daySeqOfYear - lengthJan;
+    }
+    else if(daySeqOfYear <= lengthMar)
+    {
+        day = daySeqOfYear - lengthFeb;
+    }
+    else if(daySeqOfYear <= lengthApr)
+    {
+        day = daySeqOfYear - lengthMar;
+    }
+    else if(daySeqOfYear <= lengthMay)
+    {
+        day = daySeqOfYear - lengthApr;
+    }
+    else if(daySeqOfYear <= lengthJun)
+    {
+        day = daySeqOfYear - lengthMay;
+    }
+    else if(daySeqOfYear <= lengthJul)
+    {
+        day = daySeqOfYear - lengthJun;
+    }
+    else if(daySeqOfYear <= lengthAug)
+    {
+        day = daySeqOfYear - lengthJul;
+    }
+    else if(daySeqOfYear <= lengthSep)
+    {
+        day = daySeqOfYear - lengthAug;
+    }
+    else if(daySeqOfYear <= lengthOct)
+    {
+        day = daySeqOfYear - lengthSep;
+    }
+    else if(daySeqOfYear <= lengthNov)
+    {
+        day = daySeqOfYear - lengthOct;
+    }
+    else if(daySeqOfYear <= lengthDec)
+    {
+        day = daySeqOfYear - lengthNov;
+    }
 // **********************************************
 
     return day;
@@ -425,7 +443,14 @@ int  getThisMonday(int year, int referenceDay)
 
 // **********************************************
 // << Write your source code here >>
-    if (daySeqOfYear)
+    if (getDaySeqOfWeek(year, referenceDay) == 0)
+    {
+        daySeqOfYear = referenceDay;
+    }
+    else
+    {
+        daySeqOfYear = referenceDay - getDaySeqOfWeek(year, referenceDay) + 7;
+    }
 // **********************************************
 
     return daySeqOfYear;
@@ -438,6 +463,14 @@ int  getThisSunday(int year, int referenceDay)
 
 // **********************************************
 // << Write your source code here >>
+    if (getDaySeqOfWeek(year, referenceDay) == 6)
+    {
+        daySeqOfYear = referenceDay;
+    }
+    else
+    {
+        daySeqOfYear = referenceDay + 6 - getDaySeqOfWeek(year, referenceDay);
+    }
 // **********************************************
 
     return daySeqOfYear;
