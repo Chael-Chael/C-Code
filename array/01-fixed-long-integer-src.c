@@ -60,6 +60,10 @@ void generateLongInt( char longInt[] )
     int i;
     for ( i = 0; i < INT_WIDTH; i ++ )
     {
+        while (longInt[0] == '0')
+        {
+            longInt[0] = rand() % 10 + '0';
+        }
         longInt[i] = rand() % 10 + '0';
     }
     //
@@ -80,12 +84,27 @@ int addTwoLongInts( char longInt1[],  char longInt2[], char longIntSum[] )
     // **********************************************
     // << Your source code starts here >>
     //
-    for (i = INT_WIDTH-1; i > 0; i--)
+    int i, j;
+    for (i = INT_WIDTH - 1; i > 0; i--)
     {
-        for (j = INT_WIDTH - 1; j > 0 ; j--)
+        longIntSum[i] = longInt1[i] + longInt2[i] - '0';
+        if (longIntSum[i] > '9')
         {
-            
+            longIntSum[i] -= 10;
+            longIntSum[i - 1] += 1;
+            printf("%c %c\n", longIntSum[i], longIntSum[i - 1]);
         }
+    }
+
+    longIntSum[0] += (longInt1[0] + longInt2[0] - '0');
+
+    if (longIntSum[0] > '9')
+    {
+        isOverflow = 1;
+    }
+    else
+    {
+        isOverflow = 0;
     }
     //
     // << Your source code stops here >>
