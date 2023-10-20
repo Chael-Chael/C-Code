@@ -91,8 +91,7 @@ int addTwoLongInts( char longInt1[],  char longInt2[], char longIntSum[] )
         if (longIntSum[i] > '9')
         {
             longIntSum[i] -= 10;
-            longIntSum[i - 1] += 1;
-            printf("%c %c\n", longIntSum[i], longIntSum[i - 1]);
+            longIntSum[i - 1] += (1 + '0');
         }
     }
 
