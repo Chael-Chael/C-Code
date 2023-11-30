@@ -1,99 +1,91 @@
 /* 
-【程序意图】求两个升序数组的交集
+【程序意图】从一个数字、字母、符号混排的字符串中提取数字
 
-【输入】两个随机升序数字集合
+【输入】一个随机字符串
 
-【输出】两个集合的交集 
+【输出】从随机字符串里面提取的整数个数，以及整数结果的数组
+    例如 “A>123x456” 中提取出来的2个整数，分别是 123 和 456 
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-#define SIZE  8
+#define MAX_STRING_LENGTH   20
 
-// 产生一个升序的整数数组
-void resetArray( int *array, const int size );
+// 在字符数组str里面生成一个随机C风格字符串
+// 返回值是字符串的实际有效长度（不计算'\0'）
+int generateRandomStr( char *str, const int size );
 
-// 打印一个整数数组
-void displayArray( int *array, const int size );
+// 从字符串str里面提取整数，存入numberList
+// 返回值是找到的整数的个数
+int getNumberFromString( char *str, const int length, int *numberList );
 
-// 输入两个数组array1和array2，在函数中创建动态数组interSet，
-// 通过函数返回值带回动态数组的首地址，通过interSize参数带回动态数组的元素数量
-int *getIntersection( const int *array1, const int *array2, int *interSize);
 
-int main( void )
+int main(void) 
 {
     int SEED;
     scanf("%d", &SEED);
     srand(SEED);
 
-    int array1[SIZE], array2[SIZE];
-    resetArray(array1, SIZE );
-    resetArray(array2, SIZE );
+    char str[MAX_STRING_LENGTH];
+    int length = generateRandomStr( str, MAX_STRING_LENGTH );
+    printf("Generated string with length %d: %s\n", length, str);
 
-    printf("array1: ");
-    displayArray(array1, SIZE );
-    printf("array2: ");
-    displayArray(array2, SIZE );
+    int numberList[MAX_STRING_LENGTH];
+    int numberCounter = getNumberFromString( str, length, numberList );
+    printf("Found %d numbers: ", numberCounter );
 
-    int *interSet = NULL;
-    int interSize = 0;
-    interSet = getIntersection( array1, array2, &interSize );
-    printf("intersection set: ");
-    displayArray( interSet, interSize );
-    free (interSet);
+    for ( int i = 0; i < numberCounter; i ++ )
+    {
+        printf("%d  ", numberList[i]);
+    }
+    printf("\n");
 
     return 0;
 }
 
-void resetArray( int *array,  int size)
+
+int generateRandomStr( char *str, const int size )
 {
-    int *iPtr = NULL;
-    int temp = 0;
-    for ( iPtr = array ; iPtr < array + size; iPtr ++ )
+    int length = 10 + rand() % ( MAX_STRING_LENGTH - 10) ;
+    char *p = NULL;
+    for ( p = str; p < str + length; p ++ )
     {
-        temp += 1 + rand() % 5;
-        *iPtr = temp;
+        *p = '1' + rand() % ( 'Z' - '0' );
     }
+    *p = '\0';
+    return length;
 }
 
-void displayArray( int *array,  int size)
+
+int getNumberFromString( char *str, const int length, int *numberList )
 {
-    int *iPtr;
-    for ( iPtr = array; iPtr < array + size; iPtr ++ )
-    {
-        printf("%02d ", *iPtr);
-    }
-    printf("\n");
-}
+    // 设置两个指针分别在str数组和numberList数组里面偏移
+    char *cPtr = str;
+    int *iPtr = numberList;
 
-int *getIntersection( const int *array1, const int *array2, int *interSize)
-{
-    // 预设一个动态数组，大小与SIZE相同
-    int *interSet = (int *)malloc( sizeof(int) * SIZE );
-
-    // 设置三个指针变量，分别遍历array1、array2和interSet
-    int *p1 = (int *)array1;
-    int *p2 = (int *)array2;
-    int *p3 = interSet;
-
-    // 通过指针的遍历获取交集的结果，不得再开辟其它内存区
+    // 通过指针的遍历获取结果，不得再开辟其它内存区
     // -------------------------
     // your code start here
+    int num = 0;
 
+    for(int i = 0; i < length; i++) {
+        if (*(str+i) >= '0' && *(str+i) <= '9') {
+            num = num * 10 + (*(str+i) - '0');
+        } else {
+            if (num != 0) {
+                *iPtr = num;
+                iPtr++;
+                num = 0;
+            }
+        }
+    }
 
+    if (num != 0) {
+        *iPtr = num;
+        iPtr++;
+    }
 
-
-
-
-
-
-    // your code end here
-    // -------------------------
-
-    // 根据实际找到的交集元素数量，重新分配动态数组interSet的内存
-    interSet = realloc( interSet, sizeof(int) * *interSize );
-
-    return interSet;
+    return (iPtr - numberList);
 }
