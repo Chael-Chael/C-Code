@@ -1,174 +1,99 @@
-// 文字处理
+/* 
+【程序意图】求两个升序数组的交集
 
-// 【问题描述】
-// 对于给定的一段文字，将其解析到一个字符串数组(二维字符数组)中，
-// 输出长度最长的单词，出现频次最多的单词
+【输入】两个随机升序数字集合
 
-// 【编写要求】
-// 1. 完成下列3个函数
-// 2. 尽可能使用指针表达字符或者字符串，体会指针的用法
+【输出】两个集合的交集 
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <time.h>
 
-#define MAX_WORD_NUM   200
-#define MAX_WORD_LEN   30
+#define SIZE  8
 
-int parseMessage( char * message[], char (*words)[MAX_WORD_LEN], int seed);
-int findLongestWord( char (*words)[MAX_WORD_LEN], int wordCounter );
-void findHighFreqWord( char (*words)[MAX_WORD_LEN], int wordCounter,
-         int *mostIndex, int *mostValue ); 
-int getlength(char (*words)[MAX_WORD_LEN], int place);
+// 产生一个升序的整数数组
+void resetArray( int *array, const int size );
 
-int main()
+// 打印一个整数数组
+void displayArray( int *array, const int size );
+
+// 输入两个数组array1和array2，在函数中创建动态数组interSet，
+// 通过函数返回值带回动态数组的首地址，通过interSize参数带回动态数组的元素数量
+int *getIntersection( const int *array1, const int *array2, int *interSize);
+
+int main( void )
 {
-    char* message[] = {"C is a general-purpose, high-level language that was originally developed by Dennis M. Ritchie to develop the UNIX operating system at Bell Labs. ",
-    "C was originally first implemented on the DEC PDP-11 computer in 1972.",
-    "In 1978, Brian Kernighan and Dennis Ritchie produced the first publicly available description of C, now known as the K&R standard.",
-    "The UNIX operating system, the C compiler, and essentially all UNIX application programs have been written in C. ",
-    "C programming is a general-purpose, procedural, imperative computer programming language developed in 1972 by Dennis M. Ritchie at the Bell Telephone Laboratories to develop the UNIX operating system. C is the most widely used computer language. It keeps fluctuating at number one scale of popularity along with the Java programming language, which is also equally popular and most widely used among modern software programmers."};
-    
-    char words[MAX_WORD_NUM][MAX_WORD_LEN] = {0};
+    int SEED;
+    scanf("%d", &SEED);
+    srand(SEED);
 
-    int seed;
-    scanf("%d",&seed);
+    int array1[SIZE], array2[SIZE];
+    resetArray(array1, SIZE );
+    resetArray(array2, SIZE );
 
+    printf("array1: ");
+    displayArray(array1, SIZE );
+    printf("array2: ");
+    displayArray(array2, SIZE );
 
-    int wordCounter = parseMessage( message, words, seed);
-    printf("Total %d words are found.\n", wordCounter );
-
-    int indexLong = findLongestWord( words, wordCounter );
-    printf("The longest word is %s\n",  words[ indexLong ] );
-
-    /*int counter = 0;
-    for (int i = 0; i < wordCounter; i ++)
-    {
-        printf("%d,", getlength(words, i));
-        counter ++;
-    }
-    printf("\n%d", counter);*/
-    
-    int indexMost, valueMost;
-    findHighFreqWord( words, wordCounter, &indexMost, &valueMost );
-    printf("The most frequently word is %s, it appears %d times\n", 
-            words[ indexMost ], valueMost );
+    int *interSet = NULL;
+    int interSize = 0;
+    interSet = getIntersection( array1, array2, &interSize );
+    printf("intersection set: ");
+    displayArray( interSet, interSize );
+    free (interSet);
 
     return 0;
 }
 
-int parseMessage( char * message[], char (*words)[MAX_WORD_LEN], int seed )
+void resetArray( int *array,  int size)
 {
-    // -----------------------------
-    // start of your source code
-    //
-    int wordCount = 0;
-    int totalCount = 0;
-    int k = seed;
-    for (int i = 0, j = 0; message[k][i] != '\0'; i ++, j ++)
-
+    int *iPtr = NULL;
+    int temp = 0;
+    for ( iPtr = array ; iPtr < array + size; iPtr ++ )
     {
-        if (message[k][i] == ' ' )
-        {
-            wordCount ++;
-            j = -1;
-        }
-        else if (message[k][i] == ',' || message[k][i] == '.')
-        {
-            wordCount ++;
-            j = -1;
-            i++; 
-        }
-        else
-        {
-            *(*(words+wordCount)+j) = message[k][i];
-        }
+        temp += 1 + rand() % 5;
+        *iPtr = temp;
     }
-    totalCount += wordCount;
-    wordCount = 0;
-    return totalCount;
-    //
-    // end of your source code
-    // -----------------------------
 }
 
-int findLongestWord( char (*words)[MAX_WORD_LEN] , int wordCounter )
+void displayArray( int *array,  int size)
 {
-    // -----------------------------
-    // start of your source code
-    //
-    int indexLong = 0;
-    int wordLength = 0;
-    for (int k = 0; k < wordCounter; k ++)
+    int *iPtr;
+    for ( iPtr = array; iPtr < array + size; iPtr ++ )
     {
-        int i;
-        for (i = 0; i < MAX_WORD_NUM && *(*(words+k)+i) != 0; i++);
-        if (i > wordLength)
-        {
-            indexLong = k;
-            wordLength = i;
-        }
+        printf("%02d ", *iPtr);
     }
-    return indexLong;
-
-    //
-    // end of your source code
-    // -----------------------------
+    printf("\n");
 }
 
-int getlength(char (*words)[MAX_WORD_LEN], int place)
+int *getIntersection( const int *array1, const int *array2, int *interSize)
 {
-    int i;
-    for (i = 0; i < MAX_WORD_LEN && (*(*(words+place)+i) != 0) ; i++);
-    return i;
-}
+    // 预设一个动态数组，大小与SIZE相同
+    int *interSet = (int *)malloc( sizeof(int) * SIZE );
 
-void findHighFreqWord( char (*words)[MAX_WORD_LEN] , int wordCounter, int *mostIndex, int *mostValue )
-{
-    // -----------------------------
-    // start of your source code
-    //
-    int isFound[MAX_WORD_LEN][2]={0};
+    // 设置三个指针变量，分别遍历array1、array2和interSet
+    int *p1 = (int *)array1;
+    int *p2 = (int *)array2;
+    int *p3 = interSet;
 
-    for (int k = 0; k < wordCounter - 1; k ++)
-    {
-        for (int j = k + 1; j < wordCounter; j ++)
-        {
-            if (getlength(words, k) == getlength(words, j))
-            {
-                for (int i = 0; i < MAX_WORD_NUM && *(*(words+k)+i) != 0 || *(*(words+j)+i) != 0; i++)
-                {
-                    if ( *(*(words+k)+i) == *(*(words+j)+i))
-                    {
-                        isFound[j][0] = 1;
-                    }
-                    else
-                    {
-                        isFound[j][0] = 0;
-                        break;
-                    }
-                }
+    // 通过指针的遍历获取交集的结果，不得再开辟其它内存区
+    // -------------------------
+    // your code start here
 
-                if (isFound[j][0] == 1)
-                {
-                    isFound[k][1] ++;
-                }
-            }
-        }
-    }
 
-    *mostIndex = 0;
-    *mostValue = 0;
 
-    for (int i = 0; i < MAX_WORD_LEN; i ++)
-    {
-        if ((isFound[i][1]+1) > *mostValue)
-        {
-            *mostIndex = i;
-            *mostValue = isFound[i][1] + 1;
-        }
-    }
-    //
-    // end of your source code
-    // -----------------------------
+
+
+
+
+
+    // your code end here
+    // -------------------------
+
+    // 根据实际找到的交集元素数量，重新分配动态数组interSet的内存
+    interSet = realloc( interSet, sizeof(int) * *interSize );
+
+    return interSet;
 }
