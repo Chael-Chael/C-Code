@@ -21,6 +21,13 @@ int main()
 
     char *pointer = wordList;
     int wCounter = parseMessage(message, pointer);
+
+    for (int i = 0; i < wCounter; i++)
+    {
+        
+        printf("%s\n", wordList[i]);
+    }
+
     printf("\nFind total %d words.\n\n", wCounter);
 
     return 0;
@@ -47,6 +54,8 @@ int parseMessage(char message[], char *wordList)
         }
         ptr ++;
     }
+
+    return counter;
 }
 //
 // << Your source code stops here >>

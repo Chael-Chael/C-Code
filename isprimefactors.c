@@ -56,6 +56,29 @@ void printPrimeFactors(int x)
 {
     int i;
     printf("%d = ", x);
+
+    //
+    for (i = 2; i <= x; i ++)
+    {
+        while (x % i == 0)
+        {
+            printf("%d", i);
+            x /= i;
+
+            if (x != 1)
+            {
+                printf("*");
+            }
+        }
+    }
+
+    printf("\n");
+}
+/*
+void printPrimeFactors(int x)
+{
+    int i;
+    printf("%d = ", x);
     for (i = 2; i <= x; i ++)
     {
         if (x % i == 0)
@@ -68,3 +91,4 @@ void printPrimeFactors(int x)
     printf("\b\b  ");
     printf("\n");
 }
+*/
